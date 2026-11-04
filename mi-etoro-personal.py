@@ -7,11 +7,11 @@ from streamlit_autorefresh import st_autorefresh
 # Configuración de la página web estilo app móvil/financiera
 st.set_page_config(page_title="Mi Mini-eToro", page_icon="📈", layout="centered")
 
-# Configurar autorefresco cada 10 segundos (10000 milisegundos) para que actúe en vivo
-count = st_autorefresh(interval=10000, limit=None, key="bot_autorefresh_counter")
+# Configurar autorefresco cada 1 segundo (1000 milisegundos)
+count = st_autorefresh(interval=1000, limit=None, key="bot_autorefresh_counter")
 
 st.title("📈 Mini-eToro Bot Trader en Vivo")
-st.write(f"🔄 Ciclo de monitorización activo (Actualización nº {count})")
+st.write(f"🔄 Actualización en tiempo real (Ciclo nº {count})")
 
 # --- BARRA LATERAL (CONFIGURACIÓN) ---
 st.sidebar.header("⚙️ Configuración del Bot")
@@ -45,13 +45,13 @@ if not datos_df.empty:
     st.markdown("---")
 
     # --- GRÁFICO INTERACTIVO ---
-    st.subheader("📊 Gráfico de Evolución del Precio en Directo")
+    st.subheader("📊 Gráfico de Evolución del Precio")
     st.line_chart(datos_df['Close'])
 
     # --- ESTADO DEL BOT ---
     st.subheader("🤖 Vigía del Mercado Automático")
-    st.success(f"🟢 El bot está observando {ticker} en tiempo real.")
-    st.info(f"💡 **Gestión de riesgo activa:** Stop-Loss al {stop_loss_pct*100}% | Take-Profit al {take_profit_pct*100}%. Última lectura a las {time.strftime('%H:%M:%S')}")
+    st.success(f"🟢 El bot está vigilando {ticker} a cada segundo.")
+    st.info(f"💡 **Gestión de riesgo activa:** Stop-Loss al {stop_loss_pct*100}% | Take-Profit al {take_profit_pct*100}%. Última lectura: {time.strftime('%H:%M:%S')}")
 else:
     st.error("Esperando conexión con el mercado...")
 
